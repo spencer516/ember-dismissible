@@ -1,18 +1,24 @@
 /*jshint node:true*/
 /* global require, module */
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
+var FindCodeSnippets = require('./lib/find-code-snippets');
+var BroccoliMergeTrees = require('broccoli-merge-trees');
 
 module.exports = function(defaults) {
-  var app = new EmberAddon(defaults, {
-    // Add options here
+  var app = new EmberAddon(defaults, {});
+
+  app.import('bower_components/highlightjs/highlight.pack.min.js');
+  app.import('bower_components/remarkable/dist/remarkable.min.js');
+
+  var snippets = new FindCodeSnippets(['tests/dummy/app'], {
+    outputFile: 'dummy/snippets.js'
   });
 
-  /*
-    This build file specifies the options for the dummy test app of this
-    addon, located in `/tests/dummy`
-    This build file does *not* influence how the addon or the app using it
-    behave. You most likely want to be modifying `./index.js` or app's build file
-  */
+  // Merge the snippets into the app tree. (is there a better way to do this?)
+  app._appAndDependencies = app.appAndDependencies;
+  app.appAndDependencies = function() {
+    return new BroccoliMergeTrees([app._appAndDependencies(), snippets]);
+  };
 
   return app.toTree();
 };

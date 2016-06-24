@@ -1,0 +1,5 @@
+<h1 class="component-usage-title">{{attrs.title}}</h1>
+{{yield (hash
+  template=(component 'component-usage-template' language='handlebars' name=attrs.title)
+  notes=(component 'component-usage-notes')
+)}}

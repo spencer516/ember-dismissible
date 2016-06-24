@@ -1,22 +1,73 @@
-<div class="row">
-  <div class="col-md-12">
-    <h1>Ember Dismissible</h1>
-    <p>
-      This addon does one thing: makes a dismissible component. This can be used for modals,
-      context menus, auto-suggest lists, etc!
-    </p>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-    <h3>Example 1: Context Menu</h3>
-    <button {{action (action (mut example1) true)}}>Show Menu</button>
-    {{#if example1}}
-      {{#dismissible-panel action=(action (mut example1) false)}}
-        <ul>
-          <li></li>
-        </ul>
+<h1>Ember Dismissible</h1>
+<p>
+  This addon does one thing: makes a dismissible component. This can be used for modals,
+  context menus, auto-suggest lists, etc.
+</p>
+<p>
+  It is, as far as I know, ARIA compliant. However, if there are any gaps in the basic
+  accessibility, please open an issue (or a PR!).
+</p>
+
+{{#component-usage title='Context Menu Usage' as |u|}}
+  {{#u.template}}
+    <style>
+      .container-1 {
+        position: relative;
+      }
+
+      .the-thing {
+        position: absolute;
+        padding: 10px;
+        border: 1px solid grey;
+        background: white;
+      }
+    </style>
+    <div class="container-1">
+      <button {{action (action (mut example1) true)}}>Show Menu</button>
+      {{#if example1}}
+        {{#dismissible-panel tagName='ul' class='the-thing' action=(action (mut example1) false)}}
+          <li>The First Thing</li>
+          <li>The Other Thing</li>
+        {{/dismissible-panel}}
+      {{/if}}
+    </div>
+  {{/u.template}}
+{{/component-usage}}
+
+
+{{#component-usage title='Modal Usage' as |u|}}
+  {{#u.template}}
+    <style>
+      .modal-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: rgba(0, 0, 0, 0.5);
+      }
+
+      .modal-content {
+        position: relative;
+        margin: 100px auto;
+        background: white;
+        width: 500px;
+        padding: 20px;
+      }
+    </style>
+    <button {{action (action (mut example2) true)}}>Show Menu</button>
+    {{#if example2}}
+      {{#dismissible-panel action=(action (mut example2) false) as |dismiss|}}
+        <div class="modal-wrapper" {{action dismiss}}>
+          <div class="modal-content">
+            <h2>This is a modal.</h2>
+            <p>Try tabbing through the inputs.</p>
+            <input type="text" placeholder="Input #1">
+            <input type="text" placeholder="Input #2">
+            <button {{action dismiss}}>Close Modal</button>
+          </div>
+        </div>
       {{/dismissible-panel}}
     {{/if}}
-  </div>
-</div>
+  {{/u.template}}
+{{/component-usage}}
