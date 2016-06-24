@@ -106,7 +106,10 @@ test('the click handler is properly removed', function(assert) {
 function triggerKey($sel, keyCode, eventName = 'keyup', additionalOpts = {}) {
   let event = Ember.$.Event(eventName);
   event.keyCode = keyCode;
-  Object.assign(event, additionalOpts);
+  Object.keys(additionalOpts).forEach((key) => {
+    event[key] = additionalOpts[key];
+  });
+
   $sel.trigger(event);
 }
 
