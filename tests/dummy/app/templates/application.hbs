@@ -1,0 +1,22 @@
+<div class="row">
+  <div class="col-md-12">
+    <h1>Ember Dismissible</h1>
+    <p>
+      This addon does one thing: makes a dismissible component. This can be used for modals,
+      context menus, auto-suggest lists, etc!
+    </p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <h3>Example 1: Context Menu</h3>
+    <button {{action (action (mut example1) true)}}>Show Menu</button>
+    {{#if example1}}
+      {{#dismissible-panel action=(action (mut example1) false)}}
+        <ul>
+          <li></li>
+        </ul>
+      {{/dismissible-panel}}
+    {{/if}}
+  </div>
+</div>

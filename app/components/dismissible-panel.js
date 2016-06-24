@@ -1,0 +1,1 @@
+export { default } from 'ember-dismissible/components/dismissible-panel';
