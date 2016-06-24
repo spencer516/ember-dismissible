@@ -2,6 +2,10 @@
 
 This README outlines the details of collaborating on this Ember addon.
 
+## Documentation
+
+Documentation is forthcoming. In the meantime, visit the demo site at: [https://spencer516.github.io/ember-dismissible/](https://spencer516.github.io/ember-dismissible/)
+
 ## Installation
 
 * `git clone` this repository
