@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/spencer516/ember-dismissible.svg?branch=master)](https://travis-ci.org/spencer516/ember-dismissible)
+
 # Ember-dismissible
 
 This README outlines the details of collaborating on this Ember addon.
